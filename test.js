@@ -2,7 +2,7 @@ import http from "k6/http";
 import { sleep } from "k6";
 
 export default function () {
-  const url = "https://api.example.com"; // Substitua pela URL da sua API
+  const url = "https://api.example.com"; // Replace with your API URL.
 
   const payload = JSON.stringify({
     data: "example",
@@ -19,5 +19,5 @@ export default function () {
   console.log(`Status: ${response.status}`);
   console.log(`Body: ${response.body}`);
 
-  sleep(1); // Aguarda 1 segundo antes de enviar a próxima solicitação
+  sleep(1); // Wait 1 second before sending the next request
 }

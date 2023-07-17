@@ -1,28 +1,28 @@
 #!/bin/bash
 
 if [ "$#" -gt 0 ]; then
-    # Inicialização do container
+    # Container initialization
     if [ "$1" = "build" ]; then
-        echo 'Construindo imagem do k6...'
-        # Cria um arquivo Dockerfile temporário
+        echo 'Building k6 image...'
+        # Create a temporary Dockerfile
         echo 'FROM grafana/k6' >Dockerfile.temp
-        # Constrói a imagem do Docker com base no arquivo Dockerfile.temp
+        # Build the Docker image based on the temporary Dockerfile
         docker build -t k6-container -f Dockerfile.temp .
-        # Remove o arquivo Dockerfile.temp
+        # Remove the temporary Dockerfile
         rm Dockerfile.temp
     fi
-    # Executar o container em modo interativo
+    # Run the container in interactive mode
     if [ "$1" = "run" ]; then
-        echo 'Executando o container do k6 em modo interativo...'
-        # Executa o container a partir da imagem k6-container com um volume para o diretório atual
+        echo 'Running k6 container in interactive mode...'
+        # Run the container from the k6-container image with a volume for the current directory
         docker run -it --name k6 -v "$(pwd):/scripts" k6-container run /scripts/test.js
     fi
-    # Parar e remover o contêiner
+    # Stop and remove the container
     if [ "$1" = "stop" ]; then
-        echo 'Parando e removendo o container do k6...'
+        echo 'Stopping and removing the k6 container...'
         docker stop k6
         docker rm k6
     fi
 else
-    echo 'Comando inválido. Use "build" para construir a imagem, "run" para executar o container em modo interativo ou "stop" para parar e remover o container.'
+    echo 'Invalid command. Use "build" to build the image, "run" to run the container in interactive mode, or "stop" to stop and remove the container.'
 fi
