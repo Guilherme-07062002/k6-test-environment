@@ -8,6 +8,12 @@ To use the K6 Test Container, follow these steps:
 
 * Install Docker on your system if you haven't already.
 * Clone this repository to your local machine.
+* Before running any scripts, make sure to give execute permission to the script files. You can use the chmod command for that, for example:
+
+```bash
+chmod +x cmd
+```
+
 * Build the Docker image using the provided script:
 
 ```bash
